@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Header from './components/header'
+import SearchBar from './components/searchBar'
+import Profile from './components/profile'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component{
+  constructor() {
+    super()
+
+    this.state = {
+      search: ''
+    }
+
+    this.handleSearch = this.handleSearch.bind(this)
+    this.handleClear = this.handleClear.bind(this)
+  }
+
+  handleSearch = (book) => {
+    this.setState({ search: book })
+  }
+
+  handleClear = () => {
+    this.setState({ search: '' })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Header className='header'/>
+        <SearchBar handleSearch={this.handleSearch} handleClear={this.handleClear}/>
+        < Profile search={this.state.search}/>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default App
